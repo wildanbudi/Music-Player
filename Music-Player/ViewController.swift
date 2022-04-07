@@ -50,6 +50,9 @@ class ViewController: UIViewController {
             blurEffectView.effect = blurEffect
         }
         
+        // To notify the changeLyrics function when textView value changed
+        NotificationCenter.default.addObserver(self, selector: #selector(updateChangedLyricstoArray), name: UITextView.textDidChangeNotification, object: nil)
+
         // Insert music
         arrOfMusic = MusicFeeder.init().arrOfMusic
         
@@ -143,6 +146,10 @@ class ViewController: UIViewController {
             favMusicBtn.setImage(UIImage(systemName: "heart"), for: .normal)
         }
         
+    }
+    
+    @objc func updateChangedLyricstoArray() {
+        arrOfMusic[currMusic].lyrics = lyricsTextView.text
     }
 
 }
